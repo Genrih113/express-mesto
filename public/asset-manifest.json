@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/mesto-react/static/css/main.7faeda92.chunk.css",
-    "main.js": "/mesto-react/static/js/main.c1dad701.chunk.js",
-    "main.js.map": "/mesto-react/static/js/main.c1dad701.chunk.js.map",
-    "runtime-main.js": "/mesto-react/static/js/runtime-main.90dfed8f.js",
-    "runtime-main.js.map": "/mesto-react/static/js/runtime-main.90dfed8f.js.map",
-    "static/js/2.35c00104.chunk.js": "/mesto-react/static/js/2.35c00104.chunk.js",
-    "static/js/2.35c00104.chunk.js.map": "/mesto-react/static/js/2.35c00104.chunk.js.map",
-    "static/js/3.f6758bae.chunk.js": "/mesto-react/static/js/3.f6758bae.chunk.js",
-    "static/js/3.f6758bae.chunk.js.map": "/mesto-react/static/js/3.f6758bae.chunk.js.map",
-    "index.html": "/mesto-react/index.html",
-    "static/css/main.7faeda92.chunk.css.map": "/mesto-react/static/css/main.7faeda92.chunk.css.map",
-    "static/js/2.35c00104.chunk.js.LICENSE.txt": "/mesto-react/static/js/2.35c00104.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/mesto-react/static/media/trash.a274c87c.svg",
-    "static/media/mesto_logo.a307e1c4.svg": "/mesto-react/static/media/mesto_logo.a307e1c4.svg"
+    "main.css": "./static/css/main.917708da.chunk.css",
+    "main.js": "./static/js/main.c1dad701.chunk.js",
+    "main.js.map": "./static/js/main.c1dad701.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.83ab5c23.js",
+    "runtime-main.js.map": "./static/js/runtime-main.83ab5c23.js.map",
+    "static/js/2.35c00104.chunk.js": "./static/js/2.35c00104.chunk.js",
+    "static/js/2.35c00104.chunk.js.map": "./static/js/2.35c00104.chunk.js.map",
+    "static/js/3.f6758bae.chunk.js": "./static/js/3.f6758bae.chunk.js",
+    "static/js/3.f6758bae.chunk.js.map": "./static/js/3.f6758bae.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.917708da.chunk.css.map": "./static/css/main.917708da.chunk.css.map",
+    "static/js/2.35c00104.chunk.js.LICENSE.txt": "./static/js/2.35c00104.chunk.js.LICENSE.txt",
+    "static/media/index.css": "./static/media/trash.a274c87c.svg",
+    "static/media/mesto_logo.a307e1c4.svg": "./static/media/mesto_logo.a307e1c4.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.90dfed8f.js",
+    "static/js/runtime-main.83ab5c23.js",
     "static/js/2.35c00104.chunk.js",
-    "static/css/main.7faeda92.chunk.css",
+    "static/css/main.917708da.chunk.css",
     "static/js/main.c1dad701.chunk.js"
   ]
 }
