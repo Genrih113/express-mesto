@@ -1,5 +1,7 @@
 const path = require('path');
 const getDataFromFile = require('../helpers/files');
+const { User } = require('../models/user');
+console.log(User);
 
 const dataPath = path.join(__dirname, '..', 'data', 'users.json');
 
@@ -19,4 +21,11 @@ const getProfile = (req, res) => getDataFromFile(dataPath)
   })
   .catch((err) => res.status(500).send(err));
 
-module.exports = { getUsers, getProfile };
+const createUser = (req, res) => {
+  const { name, about, avatar } = req.body;
+  User.create({ name, about, avatar })
+    .then((user) => res.send({ data: user }))
+    .catch(() => res.status(500).send({ message: 'Не удалось выполнить создание пользователя' }));
+};
+
+module.exports = { getUsers, getProfile, createUser };
