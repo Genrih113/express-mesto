@@ -1,31 +1,60 @@
-const path = require('path');
-const getDataFromFile = require('../helpers/files');
-const { User } = require('../models/user');
-console.log(User);
+const User = require('../models/user');
+const { handleErrors } = require('../helpers/handleErrors');
 
-const dataPath = path.join(__dirname, '..', 'data', 'users.json');
+const getUsers = (req, res) => {
+  User.find({})
+    .then((users) => res.send(users))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
 
-const getUsers = (req, res) => getDataFromFile(dataPath)
-  .then((users) => res.status(200).send(users))
-  .catch((err) => res.status(500).send(err));
-
-const getProfile = (req, res) => getDataFromFile(dataPath)
-  .then((users) => {
-    const userBeingRequested = users.find((user) => user._id === req.params.id);
-    if (!userBeingRequested) {
-      return res.status(404).send({ message: 'Нет пользователя с таким id' });
-    }
-
-    res.status(200).send(userBeingRequested);
-    return false;
-  })
-  .catch((err) => res.status(500).send(err));
+const getProfile = (req, res) => {
+  User.findById(req.params.userId)
+    .orFail(() => {
+      const err = new Error();
+      err.message = 'Запрашиваемый профиль не найден';
+      //  console.log(err);
+      throw err;
+    })
+    .then((user) => res.send(user))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
 
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   User.create({ name, about, avatar })
-    .then((user) => res.send({ data: user }))
-    .catch(() => res.status(500).send({ message: 'Не удалось выполнить создание пользователя' }));
+    .then((user) => res.send(user))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: 'Не удалось выполнить создание пользователя' });
+    });
 };
 
-module.exports = { getUsers, getProfile, createUser };
+const updateProfile = (req, res) => {
+  const { name, about } = req.body;
+  const profileId = req.user._id;
+  User.findByIdAndUpdate(profileId, { name, about }, { new: true, runValidators: true })
+    .then((user) => res.send(user))
+    .catch(() => res.status(500).send({ message: 'Не удалось выполнить обновление данных пользователя' }));
+};
+
+const updateAvatar = (req, res) => {
+  const { avatar } = req.body;
+  const profileId = req.user._id;
+  User.findByIdAndUpdate(profileId, { avatar }, { new: true, runValidators: true })
+    .then((user) => res.send(user))
+    .catch(() => res.status(500).send({ message: 'Не удалось выполнить обновление аватара пользователя' }));
+};
+
+module.exports = {
+  getUsers,
+  getProfile,
+  createUser,
+  updateProfile,
+  updateAvatar,
+};

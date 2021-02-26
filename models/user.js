@@ -16,18 +16,8 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        /^https?:\/\/[a-zA-Z0-9\-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;=]+/.test(v);
-      },
-      message: 'Некорректный URL!',
-    },
+    match: /^https?:\/\/[a-zA-Z0-9\-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;=]+/,
   },
 });
 
-const User = mongoose.model('user', userSchema);
-
-module.exports = {
-  User,
-  userSchema,
-};
+module.exports = mongoose.model('user', userSchema);
