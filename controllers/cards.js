@@ -1,41 +1,42 @@
 const Card = require('../models/card');
+const { sendError, setOrFailError } = require('../helpers/error-handling-helpers');
+
+const entityType = 'card';
 
 const getCards = (req, res) => {
   Card.find({})
     .then((cards) => res.send(cards))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
+    .catch((err) => sendError(err, res));
 };
 
 const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   Card.create({ name, link, owner })
+    .orFail(() => setOrFailError(entityType))
     .then((card) => res.send(card))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ err, message: 'Не удалось выполнить создание карточки' });
-    });
+    .catch((err) => sendError(err, res));
 };
 
 const deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.cardId)
+    .orFail(() => setOrFailError(entityType))
     .then((card) => res.send(card))
-    .catch(() => res.status(500).send({ message: 'не удалось удалить карточку' }));
+    .catch((err) => sendError(err, res));
 };
 
 const likeCard = (req, res) => {
   Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
+    .orFail(() => setOrFailError(entityType))
     .then((card) => res.send(card))
-    .catch(() => res.status(500).send({ message: 'Не удалось поставить лайк карточке' }));
+    .catch((err) => sendError(err, res));
 };
 
 const dislikeCard = (req, res) => {
   Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
+    .orFail(() => setOrFailError(entityType))
     .then((card) => res.send(card))
-    .catch(() => res.status(500).send({ message: 'Не удалось снять лайк карточке' }));
+    .catch((err) => sendError(err, res));
 };
 
 module.exports = {
