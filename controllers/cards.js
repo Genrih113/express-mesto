@@ -13,7 +13,6 @@ const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   Card.create({ name, link, owner })
-    .orFail(() => setOrFailError(entityType))
     .then((card) => res.send(card))
     .catch((err) => sendError(err, res));
 };

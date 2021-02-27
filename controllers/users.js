@@ -19,7 +19,8 @@ const getProfile = (req, res) => {
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   User.create({ name, about, avatar })
-    .orFail(() => setOrFailError(entityType))
+    // .orFail(() => setOrFailError(entityType))
+    // с этой строкой крашится при отправке некорр данных
     .then((user) => res.send(user))
     .catch((err) => sendError(err, res));
 };
